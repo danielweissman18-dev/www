@@ -33,7 +33,12 @@ const INITIAL_USER_STATE = {
     { id: 'daily-2', title: 'ענה על 20 שאלות', progress: 0, target: 20, reward: 15, completed: false },
     { id: 'daily-3', title: 'למד 3 ימים ברצף', progress: 0, target: 3, reward: 20, completed: false }
   ],
-  achievements: []
+  achievements: [],
+  powerUps: {
+    streakFreeze: 0,
+    doubleXP: { active: false, expiresAt: null },
+    hints: 0
+  }
 }
 
 export const UserProvider = ({ children }) => {
@@ -212,6 +217,56 @@ export const UserProvider = ({ children }) => {
     }))
   }
 
+  const buyPowerUp = (itemId, price, effect) => {
+    if (user.coins < price) return { success: false, message: 'אין מספיק מטבעות' }
+
+    setUser(prev => {
+      const newUser = { ...prev, coins: prev.coins - price }
+      
+      switch (itemId) {
+        case 'streak-freeze':
+          newUser.powerUps = {
+            ...prev.powerUps,
+            streakFreeze: prev.powerUps.streakFreeze + 1
+          }
+          break
+        case 'double-xp':
+          newUser.powerUps = {
+            ...prev.powerUps,
+            doubleXP: {
+              active: true,
+              expiresAt: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+            }
+          }
+          break
+        case 'hint-pack':
+          newUser.powerUps = {
+            ...prev.powerUps,
+            hints: prev.powerUps.hints + 5
+          }
+          break
+      }
+      
+      return newUser
+    })
+    
+    return { success: true, message: 'נרכש בהצלחה!' }
+  }
+
+  const useHint = () => {
+    if (user.powerUps.hints > 0) {
+      setUser(prev => ({
+        ...prev,
+        powerUps: {
+          ...prev.powerUps,
+          hints: prev.powerUps.hints - 1
+        }
+      }))
+      return true
+    }
+    return false
+  }
+
   const value = {
     user,
     setUser,
@@ -221,7 +276,9 @@ export const UserProvider = ({ children }) => {
     completeLesson,
     answerQuestion,
     claimMissionReward,
-    resetDailyMissions
+    resetDailyMissions,
+    buyPowerUp,
+    useHint
   }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>

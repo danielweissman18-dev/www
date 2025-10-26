@@ -25,6 +25,27 @@ function TopBar() {
             {soundEnabled ? '🔊' : '🔇'}
           </button>
           
+          {user.powerUps?.doubleXP?.active && (
+            <div className="stat-item power-up-active" title="XP כפול פעיל">
+              <span className="stat-icon">⚡</span>
+              <span className="stat-value">2X</span>
+            </div>
+          )}
+          
+          {user.powerUps?.streakFreeze > 0 && (
+            <div className="stat-item" title="הקפאות רצף">
+              <span className="stat-icon">🧊</span>
+              <span className="stat-value">{user.powerUps.streakFreeze}</span>
+            </div>
+          )}
+          
+          {user.powerUps?.hints > 0 && (
+            <div className="stat-item" title="רמזים">
+              <span className="stat-icon">💡</span>
+              <span className="stat-value">{user.powerUps.hints}</span>
+            </div>
+          )}
+          
           <div className="stat-item">
             <span className="stat-icon">❤️</span>
             <span className="stat-value">{user.hearts}/{user.maxHearts}</span>

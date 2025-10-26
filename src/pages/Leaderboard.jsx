@@ -95,6 +95,8 @@ function Leaderboard() {
     }
 
     setLoading(true)
+    setError('')
+    
     const result = resetType === 'soft' 
       ? await resetWeeklyScores() 
       : await clearLeaderboard()
@@ -102,9 +104,10 @@ function Leaderboard() {
     if (result.success) {
       await loadLeaderboard()
       setShowResetModal(false)
-      alert(resetType === 'soft' ? 'ציוני השבוע אופסו בהצלחה!' : 'הלידרבורד נמחק בהצלחה!')
+      alert(resetType === 'soft' ? 'ציוני השבוע אופסו בהצלחה! ✅' : 'הלידרבורד נמחק בהצלחה! ✅')
     } else {
-      setError('שגיאה באיפוס. נסה שוב.')
+      console.error('Reset error:', result.error)
+      setError(`שגיאה: ${result.error?.message || 'נסה שוב או בדוק את החיבור ל-Supabase'}`)
     }
     setLoading(false)
   }

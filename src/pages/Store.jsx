@@ -28,8 +28,7 @@ const storeItems = [
     description: 'שומר על הרצף גם אם תדלג יום',
     icon: '🧊',
     price: 100,
-    type: 'power-up',
-    disabled: true
+    type: 'power-up'
   },
   {
     id: 'double-xp',
@@ -37,8 +36,7 @@ const storeItems = [
     description: 'קבל XP כפול למשך 24 שעות',
     icon: '⚡',
     price: 150,
-    type: 'power-up',
-    disabled: true
+    type: 'power-up'
   },
   {
     id: 'hint-pack',
@@ -46,8 +44,7 @@ const storeItems = [
     description: '5 רמזים לשאלות קשות',
     icon: '💡',
     price: 75,
-    type: 'power-up',
-    disabled: true
+    type: 'power-up'
   },
   {
     id: 'avatar-1',
@@ -61,7 +58,7 @@ const storeItems = [
 ]
 
 function Store() {
-  const { user, buyHearts, addCoins } = useUser()
+  const { user, buyHearts, buyPowerUp } = useUser()
   const [message, setMessage] = useState('')
 
   const handlePurchase = (item) => {
@@ -84,6 +81,27 @@ function Store() {
         setTimeout(() => setMessage(''), 3000)
       } else {
         setMessage('הלבבות שלך כבר מלאים! 💖')
+        setTimeout(() => setMessage(''), 3000)
+      }
+    } else if (item.type === 'power-up') {
+      const result = buyPowerUp(item.id, item.price)
+      if (result.success) {
+        let successMsg = ''
+        switch(item.id) {
+          case 'streak-freeze':
+            successMsg = `נרכש בהצלחה! יש לך עכשיו ${user.powerUps.streakFreeze + 1} הקפאות רצף! 🧊`
+            break
+          case 'double-xp':
+            successMsg = 'XP כפול פעיל ל-24 שעות! ⚡'
+            break
+          case 'hint-pack':
+            successMsg = `נרכש בהצלחה! יש לך ${user.powerUps.hints + 5} רמזים! 💡`
+            break
+        }
+        setMessage(successMsg)
+        setTimeout(() => setMessage(''), 3000)
+      } else {
+        setMessage(result.message)
         setTimeout(() => setMessage(''), 3000)
       }
     }
@@ -152,9 +170,9 @@ function Store() {
                 <button 
                   className="btn btn-secondary btn-large"
                   onClick={() => handlePurchase(item)}
-                  disabled={item.disabled || user.coins < item.price}
+                  disabled={user.coins < item.price}
                 >
-                  {item.disabled ? 'בקרוב' : 'קנה עכשיו'}
+                  קנה עכשיו
                 </button>
               </div>
             ))}

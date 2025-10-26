@@ -50,7 +50,7 @@ export const resetWeeklyScores = async () => {
     const { error } = await supabase
       .from('leaderboard_users')
       .update({ weekly_score: 0 })
-      .neq('id', 0) // Update all rows
+      .gte('id', '00000000-0000-0000-0000-000000000000') // Match all UUIDs
     
     if (error) throw error
     return { success: true }
@@ -66,7 +66,7 @@ export const clearLeaderboard = async () => {
     const { error } = await supabase
       .from('leaderboard_users')
       .delete()
-      .neq('id', 0) // Delete all rows
+      .gte('id', '00000000-0000-0000-0000-000000000000') // Match all UUIDs
     
     if (error) throw error
     return { success: true }
