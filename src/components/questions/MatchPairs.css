@@ -1,0 +1,147 @@
+.match-pairs {
+  padding: 20px 0;
+}
+
+.match-instruction {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.pairs-container {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pair-item {
+  padding: 16px;
+  background: white;
+  border: 3px solid var(--bg-secondary);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: right;
+  position: relative;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pair-item:hover:not(.matched):not(:disabled) {
+  border-color: var(--primary-color);
+  transform: translateX(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.pair-item.selected {
+  background: var(--accent-light);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.2);
+}
+
+.pair-item.matched {
+  cursor: not-allowed;
+}
+
+.pair-item.correct {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  border-color: var(--success-color);
+  animation: bounce 0.5s ease;
+}
+
+.pair-item.incorrect {
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+  border-color: var(--danger-color);
+  animation: shake 0.3s ease;
+}
+
+.match-icon {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.connector-lines {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.connection-line {
+  height: 3px;
+  background: var(--primary-color);
+  margin: 8px 0;
+  border-radius: 2px;
+  animation: drawLine 0.3s ease;
+}
+
+.connection-line.correct {
+  background: var(--success-color);
+}
+
+.connection-line.incorrect {
+  background: var(--danger-color);
+}
+
+@keyframes drawLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.match-feedback {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.feedback-message {
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feedback-message.success {
+  background: var(--accent-light);
+  color: var(--success-color);
+}
+
+.feedback-message.error {
+  background: #FFEBEE;
+  color: var(--danger-color);
+}
+
+@media (max-width: 600px) {
+  .pairs-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .connector-lines {
+    display: none;
+  }
+
+  .pair-item {
+    font-size: 13px;
+    padding: 12px;
+  }
+}

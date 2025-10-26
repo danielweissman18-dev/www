@@ -1,0 +1,106 @@
+.word-order {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.answer-area {
+  min-height: 100px;
+  padding: 20px;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border: 3px dashed var(--secondary-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-message {
+  color: #666;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.ordered-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.available-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  background: var(--bg-color);
+  border-radius: 12px;
+}
+
+.word-chip {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.word-chip.available {
+  background: white;
+  color: var(--text-color);
+  border: 2px solid var(--primary-color);
+}
+
+.word-chip.available:hover {
+  background: var(--primary-color);
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-weight: 700;
+}
+
+.word-chip.ordered {
+  background: var(--secondary-color);
+  color: #000000;
+  border: 2px solid transparent;
+  font-weight: 600;
+}
+
+.word-chip.ordered:hover {
+  background: var(--danger-color);
+  transform: scale(0.95);
+}
+
+.word-chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.word-order-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.word-order-actions .btn {
+  flex: 1;
+  max-width: 200px;
+}
+
+.correct-answer {
+  padding: 16px;
+  background: #E8F5E9;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.correct-answer strong {
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 8px;
+}

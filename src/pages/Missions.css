@@ -1,0 +1,268 @@
+.missions-page {
+  padding-top: 20px;
+}
+
+.missions-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 24px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: #000000;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.summary-icon {
+  font-size: 48px;
+}
+
+.summary-content {
+  text-align: right;
+}
+
+.summary-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: #000000;
+}
+
+.summary-label {
+  font-size: 14px;
+  opacity: 0.9;
+  color: #000000;
+  font-weight: 600;
+}
+
+.summary-divider {
+  width: 2px;
+  height: 60px;
+  background: rgba(255,255,255,0.3);
+}
+
+.missions-list {
+  margin-bottom: 30px;
+}
+
+.mission-card {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.mission-card:hover {
+  transform: translateX(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.mission-card.completed {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  border: 2px solid var(--primary-color);
+}
+
+.mission-card.claimed {
+  opacity: 0.7;
+}
+
+.mission-icon-large {
+  font-size: 56px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.mission-content {
+  flex: 1;
+}
+
+.mission-title-large {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.mission-progress-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mission-progress-section .progress-bar {
+  flex: 1;
+}
+
+.progress-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  white-space: nowrap;
+}
+
+.mission-reward-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reward-amount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.reward-icon {
+  font-size: 28px;
+}
+
+.claimed-badge {
+  background: var(--primary-color);
+  color: #000000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.in-progress-badge {
+  background: #E0E0E0;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.streak-challenge {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+.streak-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.streak-header h3 {
+  font-size: 24px;
+  margin: 0;
+  color: #000000;
+  font-weight: 700;
+}
+
+.streak-count {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.streak-milestones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.milestone {
+  background: rgba(255,255,255,0.2);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.milestone.achieved {
+  background: rgba(255,255,255,0.3);
+  border-color: #FFD700;
+  transform: scale(1.05);
+}
+
+.milestone-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.milestone-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.milestone-reward {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFD700;
+}
+
+.missions-tips {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #000000;
+}
+
+.missions-tips h3 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.missions-tips ul {
+  list-style: none;
+  padding: 0;
+}
+
+.missions-tips li {
+  margin-bottom: 12px;
+  padding-right: 24px;
+  position: relative;
+  line-height: 1.6;
+  color: #000000;
+  font-weight: 500;
+}
+
+.missions-tips li:before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  color: #FFD700;
+}
+
+@media (max-width: 768px) {
+  .missions-summary {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .summary-divider {
+    width: 100%;
+    height: 2px;
+  }
+  
+  .streak-milestones {
+    grid-template-columns: 1fr;
+  }
+  
+  .mission-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .mission-reward-section {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

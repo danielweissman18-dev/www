@@ -1,0 +1,77 @@
+.true-false {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.tf-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 20px;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.true-btn {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  color: #2E7D32;
+}
+
+.false-btn {
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+  color: #C62828;
+}
+
+.tf-btn:hover:not(.disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.true-btn:hover:not(.disabled) {
+  border-color: #2E7D32;
+}
+
+.false-btn:hover:not(.disabled) {
+  border-color: #C62828;
+}
+
+.tf-btn.selected {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.tf-btn.correct {
+  border-color: var(--primary-color);
+  animation: bounce 0.5s ease;
+}
+
+.tf-btn.incorrect {
+  border-color: var(--danger-color);
+  animation: shake 0.3s ease;
+}
+
+.tf-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tf-icon {
+  font-size: 48px;
+}
+
+.tf-label {
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .true-false {
+    grid-template-columns: 1fr;
+  }
+}
