@@ -5,23 +5,23 @@ function BottomNav() {
   return (
     <nav className="bottom-nav">
       <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <span className="nav-icon">📚</span>
-        <span className="nav-label">ללמוד</span>
+        <span className="nav-icon">🏠</span>
+        <span className="nav-label">בית</span>
       </NavLink>
       
-      <NavLink to="/practice" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <span className="nav-icon">💪</span>
-        <span className="nav-label">לתרגל</span>
+      <NavLink to="/learn" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        <span className="nav-icon">📚</span>
+        <span className="nav-label">שיעורים</span>
+      </NavLink>
+      
+      <NavLink to="/stories" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        <span className="nav-icon">🎬</span>
+        <span className="nav-label">סיפורים</span>
       </NavLink>
       
       <NavLink to="/leaderboard" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
         <span className="nav-icon">🏆</span>
         <span className="nav-label">דירוג</span>
-      </NavLink>
-      
-      <NavLink to="/missions" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-        <span className="nav-icon">🎯</span>
-        <span className="nav-label">משימות</span>
       </NavLink>
       
       <NavLink to="/store" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>

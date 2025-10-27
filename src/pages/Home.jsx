@@ -68,6 +68,20 @@ function Home() {
         </div>
       </div>
 
+      <div className="quick-links">
+        <button 
+          className="btn btn-secondary btn-large"
+          onClick={() => {
+            soundManager.playButton()
+            navigate('/stories')
+          }}
+          style={{ marginBottom: '16px' }}
+        >
+          <span style={{ fontSize: '24px' }}>🎬</span>
+          צפה בסיפורים מונפשים
+        </button>
+      </div>
+
       <button 
         className="btn btn-primary btn-large start-learning-btn bounce"
         onClick={handleStartLearning}

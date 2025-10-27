@@ -7,6 +7,8 @@ import Leaderboard from './pages/Leaderboard'
 import Missions from './pages/Missions'
 import Store from './pages/Store'
 import Lesson from './pages/Lesson'
+import Stories from './pages/Stories'
+import StoryPlayer from './pages/StoryPlayer'
 import Login from './pages/Login'
 import { UserProvider, useUser } from './context/UserContext'
 
@@ -23,11 +25,13 @@ function AppRoutes() {
       <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
         <Route index element={<Home />} />
         <Route path="learn" element={<Learn />} />
+        <Route path="stories" element={<Stories />} />
         <Route path="practice" element={<Practice />} />
         <Route path="leaderboard" element={<Leaderboard />} />
         <Route path="missions" element={<Missions />} />
         <Route path="store" element={<Store />} />
         <Route path="lesson/:lessonId" element={<Lesson />} />
+        <Route path="story/:storyId" element={<StoryPlayer />} />
       </Route>
     </Routes>
   )

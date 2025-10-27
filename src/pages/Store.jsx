@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useUser } from '../context/UserContext'
 import './Store.css'
 
+const ADMIN_CODE = 'דניאל המלך'
+
 const storeItems = [
   {
     id: 'hearts-1',
@@ -58,8 +60,10 @@ const storeItems = [
 ]
 
 function Store() {
-  const { user, buyHearts, buyPowerUp } = useUser()
+  const { user, buyHearts, buyPowerUp, setUser } = useUser()
   const [message, setMessage] = useState('')
+  const [showCheatModal, setShowCheatModal] = useState(false)
+  const [cheatCode, setCheatCode] = useState('')
 
   const handlePurchase = (item) => {
     if (item.disabled) {
@@ -214,6 +218,100 @@ function Store() {
           <li><strong>תרגל שיעורים:</strong> +5 מטבעות לכל תרגול</li>
         </ul>
       </div>
+
+      {/* Secret cheat button */}
+      <button 
+        className="secret-cheat-btn"
+        onClick={() => setShowCheatModal(true)}
+        style={{ 
+          position: 'fixed', 
+          bottom: '20px', 
+          left: '20px', 
+          width: '50px', 
+          height: '50px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+          border: 'none',
+          fontSize: '24px',
+          cursor: 'pointer',
+          boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
+          zIndex: 1000
+        }}
+      >
+        👑
+      </button>
+
+      {/* Cheat code modal */}
+      {showCheatModal && (
+        <div className="modal-overlay" onClick={() => setShowCheatModal(false)}>
+          <div className="modal-content card" onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>👑 קוד מנהל</h2>
+            <p style={{ textAlign: 'center', marginBottom: '20px', color: '#666' }}>
+              הכנס קוד לקבלת פרסים מיוחדים
+            </p>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="הכנס קוד..."
+              value={cheatCode}
+              onChange={(e) => setCheatCode(e.target.value)}
+              style={{ marginBottom: '20px', textAlign: 'center', fontSize: '18px' }}
+            />
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button 
+                className="btn btn-secondary"
+                onClick={() => {
+                  setShowCheatModal(false)
+                  setCheatCode('')
+                }}
+                style={{ flex: 1 }}
+              >
+                ביטול
+              </button>
+              <button 
+                className="btn btn-primary"
+                onClick={() => {
+                  if (cheatCode === ADMIN_CODE) {
+                    // Activate admin mode!
+                    setUser(prev => ({
+                      ...prev,
+                      coins: prev.coins + 200,
+                      streak: 7,
+                      hearts: prev.maxHearts,
+                      weeklyScore: prev.weeklyScore + 1000,
+                      completedLessons: [
+                        'lesson-1', 'lesson-2', 'lesson-3', 'lesson-4',
+                        'lesson-5', 'lesson-6', 'lesson-7', 'lesson-8',
+                        'lesson-9', 'lesson-10', 'lesson-11', 'lesson-12',
+                        'lesson-13', 'lesson-14', 'lesson-15', 'lesson-16'
+                      ],
+                      totalQuestions: prev.totalQuestions + 80,
+                      correctAnswers: prev.correctAnswers + 80,
+                      league: 'יהלום',
+                      powerUps: {
+                        streakFreeze: prev.powerUps.streakFreeze + 5,
+                        doubleXP: { active: true, expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000) },
+                        hints: prev.powerUps.hints + 20
+                      }
+                    }))
+                    setMessage('🎉 קוד מנהל הופעל! קיבלת 200 מטבעות, כל השיעורים ופרסים מיוחדים! 👑')
+                    setTimeout(() => setMessage(''), 5000)
+                    setShowCheatModal(false)
+                    setCheatCode('')
+                  } else {
+                    setMessage('❌ קוד שגוי! נסה שוב')
+                    setTimeout(() => setMessage(''), 3000)
+                    setCheatCode('')
+                  }
+                }}
+                style={{ flex: 1 }}
+              >
+                אישור
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
