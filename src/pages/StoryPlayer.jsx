@@ -13,25 +13,10 @@ function StoryPlayer() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [animationPhase, setAnimationPhase] = useState('enter')
-  const audioRef = useRef(null)
+  const [interactionComplete, setInteractionComplete] = useState(false)
+  const [interactionData, setInteractionData] = useState(null)
 
   const story = storiesData.find(s => s.id === storyId)
-
-  // Background music control
-  useEffect(() => {
-    if (story?.backgroundMusic && audioRef.current) {
-      audioRef.current.volume = 0.3 // Keep it subtle
-      audioRef.current.loop = true
-      audioRef.current.play().catch(e => console.log('Audio autoplay blocked:', e))
-    }
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.currentTime = 0
-      }
-    }
-  }, [story])
 
   useEffect(() => {
     if (!story) {
@@ -49,26 +34,40 @@ function StoryPlayer() {
   const isLastFrame = currentFrameIndex === story.frames.length - 1
 
   const handleNext = () => {
-    if (currentFrame.question && !selectedAnswer) {
+    const needsInteraction = currentFrame.interaction && !interactionComplete
+    const needsQuestion = currentFrame.question && !selectedAnswer
+    
+    if (needsInteraction || needsQuestion) {
       soundManager.playWrong()
-      alert('בחר תשובה כדי להמשיך')
+      alert('שלב את הפעילות כדי להמשיך!')
       return
     }
 
     soundManager.playButton()
 
     if (isLastFrame) {
+      // Check if story already completed
+      const alreadyCompleted = user.completedLessons?.includes(storyId)
+      
       // Complete story
       if (currentFrame.reward) {
-        addCoins(currentFrame.reward.coins)
-        completeLesson(storyId, 1, 1)
-        soundManager.playComplete()
+        if (!alreadyCompleted) {
+          // First time - give rewards!
+          addCoins(currentFrame.reward.coins)
+          completeLesson(storyId, 1, 1)
+          soundManager.playComplete()
+        } else {
+          // Already completed - just play sound
+          soundManager.playComplete()
+        }
       }
       setTimeout(() => navigate('/stories'), 1500)
     } else {
       setCurrentFrameIndex(prev => prev + 1)
       setSelectedAnswer(null)
       setShowResult(false)
+      setInteractionComplete(false)
+      setInteractionData(null)
     }
   }
 
@@ -85,13 +84,14 @@ function StoryPlayer() {
     }
   }
 
+  const handleInteraction = (data) => {
+    setInteractionData(data)
+    setInteractionComplete(true)
+    soundManager.playCorrect()
+  }
+
   return (
     <div className="story-player">
-      {/* Background Music */}
-      {story?.backgroundMusic && (
-        <audio ref={audioRef} src={story.backgroundMusic} preload="auto" />
-      )}
-      
       <div className="story-header">
         <button className="btn btn-secondary btn-small" onClick={() => navigate('/stories')}>
           ← חזור
@@ -166,12 +166,44 @@ function StoryPlayer() {
           </div>
         )}
 
+        {/* Interactive Sections - Simplified to work properly */}
+        {currentFrame.interaction && (
+          <div className="interaction-section fade-in">
+            <div className="interaction-placeholder">
+              <div className="interaction-title">{currentFrame.interaction.text}</div>
+              <div className="simple-completion">
+                <button 
+                  className="btn btn-primary btn-large"
+                  onClick={() => handleInteraction('completed')}
+                  disabled={interactionComplete}
+                >
+                  השלמתי! ✔️
+                </button>
+                {interactionComplete && (
+                  <div className="interaction-feedback correct-feedback slide-up">
+                    🎉 מעולה! המשך למסגרת ההמשך!
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Reward Display */}
         {currentFrame.reward && isLastFrame && (
           <div className="reward-display bounce-in">
             <div className="reward-icon">🎉</div>
-            <div className="reward-text">קיבלת {currentFrame.reward.coins} מטבעות!</div>
-            <div className="reward-xp">+{currentFrame.reward.xp} XP</div>
+            {!user.completedLessons?.includes(storyId) ? (
+              <>
+                <div className="reward-text">קיבלת {currentFrame.reward.coins} מטבעות!</div>
+                <div className="reward-xp">+{currentFrame.reward.xp} XP</div>
+              </>
+            ) : (
+              <>
+                <div className="reward-text">כל הכבוד שסיימת שוב! 🎓</div>
+                <div className="reward-subtitle">פרסים ניתנים רק בפעם הראשונה 😊</div>
+              </>
+            )}
           </div>
         )}
       </div>

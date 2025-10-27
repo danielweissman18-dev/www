@@ -296,6 +296,14 @@
   color: #6B5A47;
 }
 
+.reward-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6B5A47;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
 /* Controls */
 .story-controls {
   padding: 20px;
@@ -374,6 +382,205 @@
   animation: slide-up 0.4s ease both;
 }
 
+/* Interactive Elements */
+.interaction-section {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.interaction-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+  background: #FFFFFF;
+  padding: 16px;
+  border-radius: 16px;
+  border: 3px solid #000000;
+}
+
+/* Emotion Picker */
+.emotion-picker {
+  text-align: center;
+}
+
+.emotion-options {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.emotion-btn {
+  background: #FFFFFF;
+  border: 3px solid #8B7355;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.emotion-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  border-color: #D4A574;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.emotion-btn.selected {
+  background: #D4A574;
+  border-color: #000000;
+  transform: scale(1.1);
+}
+
+.emotion-emoji {
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+
+.emotion-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Prediction Game */
+.prediction-game {
+  text-align: center;
+}
+
+.prediction-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prediction-btn {
+  background: #FFFFFF;
+  border: 3px solid #9B8772;
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.prediction-btn:hover:not(:disabled) {
+  background: #F5F1ED;
+  transform: translateX(-4px);
+}
+
+.prediction-btn.correct {
+  background: #90EE90;
+  border-color: #228B22;
+}
+
+.prediction-btn.wrong {
+  background: #FFE4E1;
+  border-color: #DC143C;
+  opacity: 0.6;
+}
+
+/* Path Choice */
+.path-choice {
+  text-align: center;
+}
+
+.path-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.path-btn {
+  background: #FFFFFF;
+  border: 3px solid #8B7355;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.path-btn:hover:not(:disabled) {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.path-btn.correct {
+  background: #90EE90;
+  border-color: #228B22;
+}
+
+.path-btn.wrong {
+  background: #FFB6C1;
+  border-color: #DC143C;
+}
+
+.path-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.path-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.path-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  opacity: 0.8;
+}
+
+/* Advanced Interactions */
+.advanced-interaction {
+  text-align: center;
+}
+
+.simple-completion {
+  padding: 30px;
+}
+
+.simple-completion .btn {
+  font-size: 20px;
+  padding: 16px 40px;
+}
+
+/* Interaction Feedback */
+.interaction-feedback {
+  background: #D4A574;
+  border: 3px solid #000000;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.interaction-feedback.correct-feedback {
+  background: #90EE90;
+  border-color: #228B22;
+}
+
+.interaction-feedback.wrong-feedback {
+  background: #FFB6C1;
+  border-color: #DC143C;
+}
+
 @media (max-width: 768px) {
   .character-body {
     width: 100px;
@@ -390,5 +597,13 @@
   
   .question-text {
     font-size: 18px;
+  }
+  
+  .emotion-emoji {
+    font-size: 48px;
+  }
+  
+  .path-options {
+    grid-template-columns: 1fr;
   }
 }

@@ -44,8 +44,11 @@ function Stories() {
                 <span className="story-category">{getCategoryName(story.category)}</span>
               </div>
               <button className="btn btn-primary btn-small">
-                {isCompleted ? 'צפה שוב' : 'התחל סיפור'}
+                {isCompleted ? 'צפה שוב 🔁' : 'התחל סיפור ▶️'}
               </button>
+              {isCompleted && (
+                <div className="completed-note">פרסים ניתנו ✅</div>
+              )}
             </div>
           )
         })}
