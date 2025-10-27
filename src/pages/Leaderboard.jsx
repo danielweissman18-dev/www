@@ -102,6 +102,9 @@ function Leaderboard() {
       : await clearLeaderboard()
     
     if (result.success) {
+      // Force immediate refresh
+      setLeaderboard([])
+      await new Promise(resolve => setTimeout(resolve, 500))
       await loadLeaderboard()
       setShowResetModal(false)
       alert(resetType === 'soft' ? 'ציוני השבוע אופסו בהצלחה! ✅' : 'הלידרבורד נמחק בהצלחה! ✅')

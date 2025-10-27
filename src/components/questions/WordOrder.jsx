@@ -1,9 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './WordOrder.css'
+
+// Shuffle array function
+const shuffleArray = (array) => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
 
 function WordOrder({ question, selectedAnswer, showResult, onAnswer }) {
   const [orderedWords, setOrderedWords] = useState([])
-  const [availableWords, setAvailableWords] = useState([...question.words])
+  const [availableWords, setAvailableWords] = useState([])
+
+  // Shuffle words on mount or when question changes
+  useEffect(() => {
+    setOrderedWords([])
+    setAvailableWords(shuffleArray([...question.words]))
+  }, [question])
 
   const handleWordClick = (word, fromAvailable = true) => {
     if (showResult) return
@@ -26,7 +42,7 @@ function WordOrder({ question, selectedAnswer, showResult, onAnswer }) {
 
   const handleReset = () => {
     setOrderedWords([])
-    setAvailableWords([...question.words])
+    setAvailableWords(shuffleArray([...question.words]))
   }
 
   return (
