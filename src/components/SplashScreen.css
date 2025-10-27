@@ -1,0 +1,181 @@
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #8B7355 0%, #6B5A47 50%, #8B7355 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.splash-screen.fade-out {
+  animation: fadeOut 1s ease-out forwards;
+}
+
+.splash-content {
+  text-align: center;
+  animation: scaleIn 0.8s ease-out;
+}
+
+.splash-logo {
+  margin-bottom: 60px;
+}
+
+.logo-icon {
+  font-size: 120px;
+  margin-bottom: 20px;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.app-title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #000000;
+  margin: 0 0 12px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  letter-spacing: 2px;
+}
+
+.app-subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  opacity: 0.9;
+}
+
+.made-by {
+  margin-top: 80px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.made-by-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 12px 0;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.creators-names {
+  font-size: 32px;
+  font-weight: 900;
+  color: #000000;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  letter-spacing: 3px;
+  animation: glow 2s ease-in-out infinite;
+}
+
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.loading-dot {
+  width: 12px;
+  height: 12px;
+  background: #000000;
+  border-radius: 50%;
+  animation: dotBounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 2px 2px 4px rgba(0,0,0,0.2);
+  }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 36px;
+  }
+  
+  .app-subtitle {
+    font-size: 16px;
+  }
+  
+  .logo-icon {
+    font-size: 80px;
+  }
+  
+  .creators-names {
+    font-size: 24px;
+  }
+  
+  .made-by-text {
+    font-size: 16px;
+  }
+}

@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
+import SplashScreen from './components/SplashScreen'
 import Home from './pages/Home'
 import Learn from './pages/Learn'
 import Practice from './pages/Practice'
@@ -38,6 +40,12 @@ function AppRoutes() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true)
+
+  if (showSplash) {
+    return <SplashScreen onComplete={() => setShowSplash(false)} />
+  }
+
   return (
     <UserProvider>
       <Router>
